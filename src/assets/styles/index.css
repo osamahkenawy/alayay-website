@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    background-color: #0B0B0B;
+    color: #FAF6EC;
+    font-family: 'Inter', 'Open Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+  }
+  ::selection {
+    background: #C9A24B;
+    color: #0B0B0B;
+  }
+}
+
+@layer utilities {
+  .ana-eyebrow {
+    @apply text-ana-gold uppercase tracking-[0.32em] text-[11px] font-medium;
+  }
+  .ana-divider {
+    @apply inline-block h-px w-16 bg-ana-gold/60 align-middle;
+  }
+  .ana-btn-primary {
+    @apply inline-flex items-center gap-2 bg-ana-gold text-ana-ink px-7 py-3.5 text-[12px] tracking-[0.22em] uppercase font-medium hover:bg-ana-gold-light transition-colors;
+  }
+  .ana-btn-ghost {
+    @apply inline-flex items-center gap-2 border border-ana-gold/70 text-ana-gold px-7 py-3.5 text-[12px] tracking-[0.22em] uppercase font-medium hover:bg-ana-gold hover:text-ana-ink transition-colors;
+  }
+  .ana-link-underline {
+    @apply inline-flex items-center gap-2 text-ana-gold uppercase tracking-[0.22em] text-[12px] font-medium border-b border-ana-gold/60 pb-1 hover:border-ana-gold-light;
+  }
+}
+
