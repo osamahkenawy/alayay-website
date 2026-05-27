@@ -1,53 +1,58 @@
-import { useEffect } from 'react';
-import Head from 'next/head';
-import Layout from 'containers/layout/layout';
-import Accordion from 'components/accordion';
+import Layout from 'components/ana/Layout';
 
-const accordionData = [
+const faqs = [
   {
-    id: '1',
-    label: 'How to contact with Customer Service?',
-    children:
-      'Our Customer Experience Team is available 6 days a week and we offer various ways to get in contact.Email and Chat. We try to reply quickly, so you need not to wait too long for a response!.',
+    q: 'Are ANA candles handmade?',
+    a: 'Yes — every candle is hand-poured in small batches in Dubai using premium soy-coconut wax and curated fragrance oils.',
   },
   {
-    id: '2',
-    label: 'App installation failed, how to update system information?',
-    children:
-      'Please read the documentation carefully. We also have some online video tutorials regarding this issue . If the problem remains, Please Open a ticket in the support forum',
+    q: 'How long do they burn?',
+    a: 'Our standard signature candles burn for approximately 40–50 hours when cared for properly (trim the wick to 5 mm before each lighting).',
   },
   {
-    id: '3',
-    label: 'Website response taking time, how to improve?',
-    children:
-      'At first, Please check your internet connection . We also have some online video tutorials regarding this issue . If the problem remains, Please Open a ticket in the support forum.',
+    q: 'Do you offer custom or zodiac gift sets?',
+    a: 'Absolutely. Each zodiac sign has its own dedicated scent. Message us on WhatsApp and we will help you curate the perfect gift.',
   },
   {
-    id: '4',
-    label: 'How do I create a account?',
-    children:
-      'If you want to open an account for personal use you can do it over the phone or online. Opening an account online should only take a few minutes.',
+    q: 'How do I place an order?',
+    a: 'All orders are placed directly through WhatsApp. Tap any "Order on WhatsApp" button on the site and our team will guide you through scent, packaging, and delivery.',
+  },
+  {
+    q: 'Do you deliver outside Dubai?',
+    a: 'Yes — we deliver across the UAE. International shipping is available on request via WhatsApp.',
   },
 ];
 
-export default function FAQ() {
+export default function FAQPage() {
   return (
-    <Layout>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
-        <meta name="Description" content="Put your description here." />
-        <title>F.A.Q</title>
-      </Head>
+    <Layout
+      title="FAQ"
+      description="Answers to common questions about ANA Candles — burn time, custom orders, zodiac scents, and delivery."
+      canonical="/faq"
+    >
+      <section className="relative py-24 lg:py-32">
+        <div className="max-w-3xl mx-auto px-6">
+          <p className="ana-eyebrow text-ana-gold-light text-center">FAQ</p>
+          <h1 className="font-serif text-4xl lg:text-5xl text-ana-cream text-center mt-3">
+            Frequently asked <em className="italic text-ana-gold">questions</em>
+          </h1>
+          <div className="ana-divider mx-auto mt-6" />
 
-      <div className="py-35px px-4 md:p-35px">
-        <h3 className="w-full flex justify-center mb-30px text-24px text-gray-900 text-center font-semibold">
-          F.A.Q
-        </h3>
-        <Accordion items={accordionData} />
-      </div>
+          <div className="mt-14 space-y-6">
+            {faqs.map((f) => (
+              <div
+                key={f.q}
+                className="border border-ana-gold/20 bg-ana-charcoal/40 backdrop-blur-sm p-6 lg:p-8 rounded-sm"
+              >
+                <h2 className="font-serif text-xl lg:text-2xl text-ana-cream">
+                  {f.q}
+                </h2>
+                <p className="mt-3 text-ana-cream/70 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 }
