@@ -17,7 +17,8 @@ module.exports = {
       NODE_ENV: 'production',
       // Port 3011 — 3010 is used by trasealla-landing, 3000 by traseallo-landing
       PORT: 3011,
-      NEXT_PUBLIC_SITE_URL: 'https://ana.trasealla.com',
+      // Primary branded domain; ana.trasealla.com still works as alias.
+      NEXT_PUBLIC_SITE_URL: 'https://anagift.ae',
     },
 
     log_date_format: 'YYYY-MM-DD HH:mm:ss Z',

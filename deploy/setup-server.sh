@@ -9,43 +9,44 @@
 set -euo pipefail
 
 APP_DIR=/var/www/trasealla/ana-gift
-DOMAIN=ana.trasealla.com
+DOMAIN=anagift.ae
+ALT_DOMAINS="www.anagift.ae ana.trasealla.com"
 PORT=3011
 PM2_APP=ana-gift
-CERT_DIR=/etc/ssl/ana-trasealla
-NGX_AVAIL=/etc/nginx/sites-available/${DOMAIN}
-NGX_ENABLED=/etc/nginx/sites-enabled/${DOMAIN}
+CERT_DIR=/etc/ssl/ana-gift
+NGX_AVAIL=/etc/nginx/sites-available/anagift.ae
+NGX_ENABLED=/etc/nginx/sites-enabled/anagift.ae
 
-echo "==> 1. Generate self-signed cert (if missing)"
+# Remove old single-domain vhost if it exists (from earlier iteration)
+rm -f /etc/nginx/sites-enabled/ana.trasealla.com /etc/nginx/sites-available/ana.trasealla.com
+
+echo "==> 1. Generate self-signed cert (always, to include all SANs)"
 mkdir -p "$CERT_DIR"
-if [ ! -f "$CERT_DIR/self.crt" ]; then
-  openssl req -x509 -nodes -newkey rsa:2048 -days 825 \
-    -keyout "$CERT_DIR/self.key" \
-    -out    "$CERT_DIR/self.crt" \
-    -subj "/CN=${DOMAIN}" \
-    -addext "subjectAltName=DNS:${DOMAIN}"
-  chmod 600 "$CERT_DIR/self.key"
-  echo "   created $CERT_DIR/self.crt"
-else
-  echo "   cert already exists, skipping"
-fi
+openssl req -x509 -nodes -newkey rsa:2048 -days 825 \
+  -keyout "$CERT_DIR/self.key" \
+  -out    "$CERT_DIR/self.crt" \
+  -subj "/CN=${DOMAIN}" \
+  -addext "subjectAltName=DNS:anagift.ae,DNS:www.anagift.ae,DNS:ana.trasealla.com"
+chmod 600 "$CERT_DIR/self.key"
+echo "   wrote $CERT_DIR/self.crt with SANs"
 
 echo "==> 2. Write nginx vhost"
 cat > "$NGX_AVAIL" <<NGINX
-# ana.trasealla.com — ANA Candles (Next.js on 127.0.0.1:${PORT})
-# Cloudflare is in front (Full / Full-Strict). Self-signed cert ok.
+# ANA Candles (Next.js on 127.0.0.1:${PORT})
+# Primary: anagift.ae   Aliases: www.anagift.ae, ana.trasealla.com
+# Cloudflare is in front (Full mode). Self-signed cert ok.
 
 server {
     listen 80;
     listen [::]:80;
-    server_name ${DOMAIN};
+    server_name ${DOMAIN} ${ALT_DOMAINS};
     return 301 https://\$host\$request_uri;
 }
 
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name ${DOMAIN};
+    server_name ${DOMAIN} ${ALT_DOMAINS};
 
     ssl_certificate     ${CERT_DIR}/self.crt;
     ssl_certificate_key ${CERT_DIR}/self.key;
