@@ -4,7 +4,7 @@ export const ANA_BRAND = {
   whatsappNumber: '+971 55 535 9422',
   whatsappLink: 'https://wa.me/971555359422',
   email: 'info@anagift.ae',
-  city: 'Dubai, United Arab Emirates',
+  city: 'Abu Dhabi, United Arab Emirates',
   country: 'AE',
 };
 

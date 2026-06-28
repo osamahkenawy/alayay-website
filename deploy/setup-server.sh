@@ -1,58 +1,53 @@
 #!/bin/bash
-# One-time server setup for ana.trasealla.com (ANA Candles)
-# - Generates self-signed cert (swap for Cloudflare origin cert later if desired)
-# - Writes nginx vhost ana.trasealla.com -> 127.0.0.1:3011
-# - Installs prod deps, starts PM2 app `ana-gift`
+# One-time server setup for alayay.trasealla.com (Alayay Maintenance)
+# - Generates self-signed cert (Cloudflare Full mode — self-signed is fine)
+# - Writes nginx vhost alayay.trasealla.com -> 127.0.0.1:3012
+# - Installs prod deps, starts PM2 app `alayay`
 #
-# Safe to re-run. Does NOT touch the trasealla.com or traseallo.com vhosts.
+# Safe to re-run. Does NOT touch other vhosts.
 
 set -euo pipefail
 
-APP_DIR=/var/www/trasealla/ana-gift
-DOMAIN=anagift.ae
-ALT_DOMAINS="www.anagift.ae ana.trasealla.com"
-PORT=3011
-PM2_APP=ana-gift
-CERT_DIR=/etc/ssl/ana-gift
-NGX_AVAIL=/etc/nginx/sites-available/anagift.ae
-NGX_ENABLED=/etc/nginx/sites-enabled/anagift.ae
+APP_DIR=/var/www/trasealla/alayay
+DOMAIN=alayay.trasealla.com
+PORT=3012
+PM2_APP=alayay
+CERT_DIR=/etc/ssl/alayay
+NGX_AVAIL=/etc/nginx/sites-available/alayay.trasealla.com
+NGX_ENABLED=/etc/nginx/sites-enabled/alayay.trasealla.com
 
-# Remove old single-domain vhost if it exists (from earlier iteration)
-rm -f /etc/nginx/sites-enabled/ana.trasealla.com /etc/nginx/sites-available/ana.trasealla.com
-
-echo "==> 1. Generate self-signed cert (always, to include all SANs)"
+echo "==> 1. Generate self-signed cert"
 mkdir -p "$CERT_DIR"
 openssl req -x509 -nodes -newkey rsa:2048 -days 825 \
   -keyout "$CERT_DIR/self.key" \
   -out    "$CERT_DIR/self.crt" \
   -subj "/CN=${DOMAIN}" \
-  -addext "subjectAltName=DNS:anagift.ae,DNS:www.anagift.ae,DNS:ana.trasealla.com"
+  -addext "subjectAltName=DNS:${DOMAIN}"
 chmod 600 "$CERT_DIR/self.key"
-echo "   wrote $CERT_DIR/self.crt with SANs"
+echo "   wrote $CERT_DIR/self.crt"
 
 echo "==> 2. Write nginx vhost"
 cat > "$NGX_AVAIL" <<NGINX
-# ANA Candles (Next.js on 127.0.0.1:${PORT})
-# Primary: anagift.ae   Aliases: www.anagift.ae, ana.trasealla.com
-# Cloudflare is in front (Full mode). Self-signed cert ok.
+# Alayay Maintenance (Next.js on 127.0.0.1:${PORT})
+# Domain: alayay.trasealla.com
+# Cloudflare Full mode — self-signed cert is fine.
 
 server {
     listen 80;
     listen [::]:80;
-    server_name ${DOMAIN} ${ALT_DOMAINS};
+    server_name ${DOMAIN};
     return 301 https://\$host\$request_uri;
 }
 
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    server_name ${DOMAIN} ${ALT_DOMAINS};
+    server_name ${DOMAIN};
 
     ssl_certificate     ${CERT_DIR}/self.crt;
     ssl_certificate_key ${CERT_DIR}/self.key;
     ssl_protocols TLSv1.2 TLSv1.3;
     ssl_ciphers HIGH:!aNULL:!MD5;
-    # Disable kTLS (kTLS breaks TLS handshake through Cloudflare on this box)
     ssl_conf_command Options -KTLS;
 
     client_max_body_size 25m;
@@ -62,7 +57,6 @@ server {
 
     location /_next/static/ {
         proxy_pass http://127.0.0.1:${PORT};
-        proxy_cache_valid 200 60m;
         add_header Cache-Control "public, max-age=31536000, immutable";
     }
 
@@ -89,11 +83,14 @@ nginx -t
 systemctl reload nginx
 echo "   nginx vhost installed & reloaded"
 
-echo "==> 3. Install production deps on server"
+echo "==> 3. Install production deps"
 cd "$APP_DIR"
 npm install --omit=dev --no-audit --no-fund
 
-echo "==> 4. Start / restart PM2"
+echo "==> 4. Build Next.js"
+NEXT_PUBLIC_SITE_URL="https://${DOMAIN}" npm run build
+
+echo "==> 5. Start / restart PM2"
 mkdir -p "$APP_DIR/logs"
 if pm2 describe "$PM2_APP" >/dev/null 2>&1; then
   pm2 restart "$PM2_APP" --update-env

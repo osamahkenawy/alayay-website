@@ -1,20 +1,24 @@
-import Layout from 'components/ana/Layout';
-import Hero from 'components/ana/sections/Hero';
-import About from 'components/ana/sections/About';
-import Signature from 'components/ana/sections/Signature';
-import Zodiac from 'components/ana/sections/Zodiac';
-import Gifts from 'components/ana/sections/Gifts';
-import OrderCTA from 'components/ana/sections/OrderCTA';
+import Layout from 'components/alayay/Layout';
+import Hero from 'components/alayay/sections/Hero';
+import Services from 'components/alayay/sections/Services';
+import AMC from 'components/alayay/sections/AMC';
+import HowItWorks from 'components/alayay/sections/HowItWorks';
+import WhyUs from 'components/alayay/sections/WhyUs';
+import Projects from 'components/alayay/sections/Projects';
+import Testimonials from 'components/alayay/sections/Testimonials';
+import Contact from 'components/alayay/sections/Contact';
 
 export default function Home() {
   return (
     <Layout>
       <Hero />
-      <About />
-      <Signature />
-      <Zodiac />
-      <Gifts />
-      <OrderCTA />
+      <Services />
+      <AMC />
+      <HowItWorks />
+      <WhyUs />
+      <Projects />
+      <Testimonials />
+      <Contact />
     </Layout>
   );
 }

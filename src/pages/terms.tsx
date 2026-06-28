@@ -1,68 +1,66 @@
-import Layout from 'components/ana/Layout';
+import Layout from 'components/alayay/Layout';
+import { ALAYAY_BRAND } from 'components/alayay/data';
+
+const SECTIONS = [
+  {
+    title: 'Services',
+    body: 'Alayay Maintenance provides villa maintenance, swimming pool services, flooring solutions, general maintenance, emergency repairs, and annual maintenance contracts (AMC) across the UAE. All services are subject to availability and site inspection.',
+  },
+  {
+    title: 'Quotations & Pricing',
+    body: 'All quotations are provided after an inspection and are valid for 14 days. Prices are in UAE Dirhams (AED) and inclusive of VAT unless stated otherwise. What we quote is what you pay — no hidden charges.',
+  },
+  {
+    title: 'Bookings & Cancellations',
+    body: 'Service appointments can be booked via WhatsApp, phone, or our website. Cancellations must be made at least 24 hours before the scheduled visit. Late cancellations may incur a fee.',
+  },
+  {
+    title: 'AMC Contracts',
+    body: 'Annual Maintenance Contracts are binding for the agreed contract period. Early termination requests must be submitted in writing and may be subject to applicable charges as outlined in the contract.',
+  },
+  {
+    title: 'Liability',
+    body: 'Alayay Maintenance is fully insured. Our team takes all reasonable precautions to protect your property. Any claims for damages must be reported within 48 hours of service completion with photographic evidence.',
+  },
+  {
+    title: 'Contact',
+    body: null,
+  },
+];
 
 export default function TermsPage() {
   return (
     <Layout
       title="Terms & Conditions"
-      description="ANA Candles terms and conditions of sale — ordering via WhatsApp, delivery in the UAE, returns, and care."
+      description="Alayay Maintenance terms and conditions — services, pricing, bookings, AMC contracts, and liability."
       canonical="/terms"
       type="article"
     >
-      <section className="relative py-24 lg:py-32">
-        <div className="max-w-3xl mx-auto px-6">
-          <p className="ana-eyebrow text-ana-gold-light text-center">Legal</p>
-          <h1 className="font-serif text-4xl lg:text-5xl text-ana-cream text-center mt-3">
-            Terms &amp; <em className="italic text-ana-gold">Conditions</em>
-          </h1>
-          <div className="ana-divider mx-auto mt-6" />
+      <section className="bg-navy py-24 pt-36">
+        <div className="al-container text-center">
+          <p className="al-eyebrow mb-4">Legal</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-white">Terms & Conditions</h1>
+          <p className="text-white/50 mt-4 text-sm">Last updated: June 2026</p>
+        </div>
+      </section>
 
-          <div className="mt-12 space-y-10 text-ana-cream/80 leading-relaxed">
-            <div>
-              <h2 className="font-serif text-2xl text-ana-cream mb-3">Ordering</h2>
-              <p>
-                Orders are placed directly through WhatsApp. By confirming an order
-                you agree to the price, scent, and delivery window communicated by
-                our team at the time of confirmation.
-              </p>
+      <section className="al-section bg-white">
+        <div className="max-w-3xl mx-auto px-6 space-y-10">
+          {SECTIONS.map((s) => (
+            <div key={s.title}>
+              <h2 className="text-xl font-bold text-navy mb-3">{s.title}</h2>
+              {s.body ? (
+                <p className="text-gray-600 leading-relaxed">{s.body}</p>
+              ) : (
+                <p className="text-gray-600 leading-relaxed">
+                  For any questions regarding these terms, contact us at{' '}
+                  <a href={`mailto:${ALAYAY_BRAND.email}`} className="text-orange font-medium hover:underline">{ALAYAY_BRAND.email}</a>{' '}
+                  or call{' '}
+                  <a href={`tel:${ALAYAY_BRAND.phone}`} className="text-orange font-medium hover:underline">{ALAYAY_BRAND.phone}</a>.
+                </p>
+              )}
             </div>
-
-            <div>
-              <h2 className="font-serif text-2xl text-ana-cream mb-3">Delivery</h2>
-              <p>
-                We deliver across the UAE. Estimated delivery is 1–3 working days
-                inside Dubai and 2–5 working days for the rest of the Emirates.
-                International orders are quoted individually.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-serif text-2xl text-ana-cream mb-3">Returns</h2>
-              <p>
-                Due to the personal nature of fragrance and the handmade process,
-                we do not accept returns on opened candles. If your order arrives
-                damaged, contact us within 48 hours on WhatsApp with a photo and we
-                will replace it.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-serif text-2xl text-ana-cream mb-3">Candle care</h2>
-              <p>
-                Trim the wick to 5 mm before each lighting. Burn for a maximum of
-                4 hours at a time. Never leave a burning candle unattended or
-                within reach of children and pets.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-serif text-2xl text-ana-cream mb-3">Contact</h2>
-              <p>
-                For any questions about these terms, reach us on WhatsApp at
-                <span className="text-ana-gold"> +971 55 535 9422</span> or by email
-                at <span className="text-ana-gold">Ana.19.19.19.1992@gmail.com</span>.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
     </Layout>

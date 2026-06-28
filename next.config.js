@@ -5,6 +5,10 @@ function getConfig(config) {
 }
 
 module.exports = getConfig({
+  i18n: {
+    locales: ['en', 'ar'],
+    defaultLocale: 'en',
+  },
   images: {
     domains: ['s3.amazonaws.com', 'scontent.cdninstagram.com'],
   },

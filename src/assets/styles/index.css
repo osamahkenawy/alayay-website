@@ -3,39 +3,51 @@
 @tailwind utilities;
 
 @layer base {
-  html,
-  body {
-    background-color: #0B0B0B;
-    color: #FAF6EC;
-    font-family: 'Inter', 'Open Sans', system-ui, sans-serif;
+  html, body {
+    background-color: #ffffff;
+    color: #1a1a2e;
+    font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
-    font-weight: 500;
-    letter-spacing: 0.005em;
+  html[dir='rtl'], html[dir='rtl'] body {
+    font-family: 'Cairo', system-ui, sans-serif;
+  }
+  [dir='rtl'] .al-eyebrow {
+    letter-spacing: 0;
   }
   ::selection {
-    background: #C9A24B;
-    color: #0B0B0B;
+    background: #E85D04;
+    color: #ffffff;
+  }
+  * {
+    box-sizing: border-box;
   }
 }
 
 @layer utilities {
-  .ana-eyebrow {
-    @apply text-ana-gold uppercase tracking-[0.32em] text-[11px] font-medium;
+  .al-eyebrow {
+    @apply text-orange uppercase tracking-[0.3em] text-xs font-semibold;
   }
-  .ana-divider {
-    @apply inline-block h-px w-16 bg-ana-gold/60 align-middle;
+  .al-btn-primary {
+    @apply inline-flex items-center gap-2 bg-orange text-white px-7 py-3.5 text-sm font-semibold rounded-full hover:bg-orange-hover transition-all duration-200;
   }
-  .ana-btn-primary {
-    @apply inline-flex items-center gap-2 bg-ana-gold text-ana-ink px-7 py-3.5 text-[12px] tracking-[0.22em] uppercase font-medium hover:bg-ana-gold-light transition-colors;
+  .al-btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-white/80 text-white px-7 py-3.5 text-sm font-semibold rounded-full hover:bg-white hover:text-navy transition-all duration-200;
   }
-  .ana-btn-ghost {
-    @apply inline-flex items-center gap-2 border border-ana-gold/70 text-ana-gold px-7 py-3.5 text-[12px] tracking-[0.22em] uppercase font-medium hover:bg-ana-gold hover:text-ana-ink transition-colors;
+  .al-btn-outline-navy {
+    @apply inline-flex items-center gap-2 border-2 border-navy text-navy px-7 py-3.5 text-sm font-semibold rounded-full hover:bg-navy hover:text-white transition-all duration-200;
   }
-  .ana-link-underline {
-    @apply inline-flex items-center gap-2 text-ana-gold uppercase tracking-[0.22em] text-[12px] font-medium border-b border-ana-gold/60 pb-1 hover:border-ana-gold-light;
+  .al-section {
+    @apply py-20 lg:py-28;
+  }
+  .al-container {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+  .al-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300;
+  }
+  .learn-more-link {
+    @apply inline-flex items-center gap-1 text-orange font-semibold text-sm mt-4 hover:gap-2 transition-all duration-200;
   }
 }
-

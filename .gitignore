@@ -40,3 +40,14 @@ coverage/
 
 # Original Envato template kept locally as reference only — not shipped to repo
 /medsy-minimal/
+
+# Local client/reference files — not part of the deployable app
+*.pdf
+*.mp4
+ana-assets/
+website-assets/
+.claude/
+# Root-level reference images (numbered shots sent by client)
+/[0-9].png
+/[0-9][0-9].png
+/Team*.png

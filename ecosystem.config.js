@@ -1,13 +1,13 @@
-// PM2 Ecosystem Configuration — ANA Candles (ana.trasealla.com)
-// Sibling app to `trasealla-landing` on the same VPS; uses a distinct port.
+// PM2 Ecosystem Configuration — Alayay Maintenance (alayay.trasealla.com)
+// Sibling app on the same VPS. Port 3012 (3010=trasealla-landing, 3011=ana-gift).
 // Usage: pm2 start ecosystem.config.js
 
 module.exports = {
   apps: [{
-    name: 'ana-gift',
+    name: 'alayay',
     script: 'npm',
     args: 'start',
-    cwd: '/var/www/trasealla/ana-gift',
+    cwd: '/var/www/trasealla/alayay',
     instances: 1,
     autorestart: true,
     watch: false,
@@ -15,15 +15,13 @@ module.exports = {
 
     env: {
       NODE_ENV: 'production',
-      // Port 3011 — 3010 is used by trasealla-landing, 3000 by traseallo-landing
-      PORT: 3011,
-      // Primary branded domain; ana.trasealla.com still works as alias.
-      NEXT_PUBLIC_SITE_URL: 'https://anagift.ae',
+      PORT: 3012,
+      NEXT_PUBLIC_SITE_URL: 'https://alayay.trasealla.com',
     },
 
     log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
     error_file: './logs/pm2-error.log',
-    out_file: './logs/pm2-out.log',
+    out_file:   './logs/pm2-out.log',
     merge_logs: true,
   }]
 };

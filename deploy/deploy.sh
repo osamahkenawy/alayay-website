@@ -1,5 +1,5 @@
 #!/bin/bash
-# Routine redeploy for ana.trasealla.com (ANA Candles)
+# Routine redeploy for alayay.trasealla.com (Alayay Maintenance)
 #
 # Usage:
 #   bash deploy/deploy.sh           # build locally, rsync, restart PM2
@@ -15,9 +15,9 @@ set -euo pipefail
 # ---- Config -----------------------------------------------------------------
 SERVER_USER=root
 SERVER_IP=72.61.177.109
-SERVER_PATH=/var/www/trasealla/ana-gift
-PM2_APP=ana-gift
-DOMAIN=ana.trasealla.com
+SERVER_PATH=/var/www/trasealla/alayay
+PM2_APP=alayay
+DOMAIN=alayay.trasealla.com
 LOCAL_PATH="$(cd "$(dirname "$0")/.." && pwd)"
 SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 
@@ -74,15 +74,17 @@ rsync -az --delete \
   --exclude '.env.local' \
   --exclude '.next/cache' \
   --exclude 'ana-assets' \
-  --exclude 'medsy-minimal' \
+  --exclude 'website-assets' \
+  --exclude '*.pdf' \
+  --exclude '*.mp4' \
   -e "$RSYNC_RSH" \
   ./ "$SERVER_USER@$SERVER_IP:$SERVER_PATH/"
 
 # ---- 4. Install prod deps + (init or restart) PM2 --------------------------
 if [ "$DO_INIT" = true ]; then
-  echo "==> [4/4] First-time init (nginx vhost, SSL, PM2 start)"
-  $SCP "$LOCAL_PATH/deploy/setup-server.sh" "$SERVER_USER@$SERVER_IP:/tmp/setup-ana.sh"
-  $SSH "bash /tmp/setup-ana.sh"
+  echo "==> [4/4] First-time init (nginx vhost, SSL, build, PM2 start)"
+  $SCP "$LOCAL_PATH/deploy/setup-server.sh" "$SERVER_USER@$SERVER_IP:/tmp/setup-alayay.sh"
+  $SSH "bash /tmp/setup-alayay.sh"
 else
   echo "==> [4/4] Installing prod deps + restarting PM2"
   $SSH "set -e
@@ -101,7 +103,7 @@ fi
 echo "==> Verify"
 $SSH "pm2 list | grep -E 'name|$PM2_APP' || true"
 echo "---"
-$SSH "curl -sI --max-time 10 http://127.0.0.1:3011/ | head -5" || true
+$SSH "curl -sI --max-time 10 http://127.0.0.1:3012/ | head -5" || true
 echo
 echo "Done. Tail logs:  ssh $SERVER_USER@$SERVER_IP 'pm2 logs $PM2_APP --lines 30 --nostream'"
 echo "Public URL:       https://${DOMAIN}"
