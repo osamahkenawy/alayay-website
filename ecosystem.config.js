@@ -1,5 +1,5 @@
 // PM2 Ecosystem Configuration — Alayay Maintenance (alayay.trasealla.com)
-// Sibling app on the same VPS. Port 3012 (3010=trasealla-landing, 3011=ana-gift).
+// Sibling app on the same VPS. Port 3013 (3010=trasealla-landing, 3011=ana-gift, 3012=mohamed-fouad).
 // Usage: pm2 start ecosystem.config.js
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
 
     env: {
       NODE_ENV: 'production',
-      PORT: 3012,
+      PORT: 3013,
       NEXT_PUBLIC_SITE_URL: 'https://alayay.trasealla.com',
     },
 

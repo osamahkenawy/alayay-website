@@ -1,7 +1,7 @@
 #!/bin/bash
 # One-time server setup for alayay.trasealla.com (Alayay Maintenance)
 # - Generates self-signed cert (Cloudflare Full mode — self-signed is fine)
-# - Writes nginx vhost alayay.trasealla.com -> 127.0.0.1:3012
+# - Writes nginx vhost alayay.trasealla.com -> 127.0.0.1:3013
 # - Installs prod deps, starts PM2 app `alayay`
 #
 # Safe to re-run. Does NOT touch other vhosts.
@@ -10,7 +10,7 @@ set -euo pipefail
 
 APP_DIR=/var/www/trasealla/alayay
 DOMAIN=alayay.trasealla.com
-PORT=3012
+PORT=3013
 PM2_APP=alayay
 CERT_DIR=/etc/ssl/alayay
 NGX_AVAIL=/etc/nginx/sites-available/alayay.trasealla.com

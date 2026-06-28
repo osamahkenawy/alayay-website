@@ -103,7 +103,7 @@ fi
 echo "==> Verify"
 $SSH "pm2 list | grep -E 'name|$PM2_APP' || true"
 echo "---"
-$SSH "curl -sI --max-time 10 http://127.0.0.1:3012/ | head -5" || true
+$SSH "curl -sI --max-time 10 http://127.0.0.1:3013/ | head -5" || true
 echo
 echo "Done. Tail logs:  ssh $SERVER_USER@$SERVER_IP 'pm2 logs $PM2_APP --lines 30 --nostream'"
 echo "Public URL:       https://${DOMAIN}"
