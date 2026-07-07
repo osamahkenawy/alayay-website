@@ -1,20 +1,20 @@
 export const ALAYAY_BRAND = {
-  name: 'Alayay Maintenance',
-  tagline: 'Professional Maintenance Services Across UAE',
-  phone: '+971 50 123 4567',
-  whatsapp: 'https://wa.me/971501234567',
+  name: 'Alayay Maintenance & General Contracting',
+  tagline: 'Building Quality That Lasts',
+  phone: '+971 58 881 6666',
+  whatsapp: 'https://wa.me/971588816666',
   email: 'info@alayay.ae',
   website: 'alayay.ae',
-  address: 'Abu Dhabi, United Arab Emirates',
+  address: 'Abu Dhabi - Edge Tower - Floor 4 - Office 3',
 };
 
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alayay.ae'
 ).replace(/\/$/, '');
 
-export const DEFAULT_TITLE = 'Alayay Maintenance — Professional Maintenance Services Across UAE';
+export const DEFAULT_TITLE = 'Alayay Maintenance & General Contracting — Building Quality That Lasts';
 export const DEFAULT_DESCRIPTION =
-  'Expert maintenance services for villas, pools, flooring, and facilities across UAE. Annual maintenance contracts, emergency repairs, and quality workmanship you can trust.';
+  'Expert maintenance & general contracting services for villas, pools, flooring, and facilities across UAE. Based in Abu Dhabi. Annual maintenance contracts, emergency repairs, and quality workmanship.';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 
 export const NAV_LINKS = [
