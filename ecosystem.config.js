@@ -16,7 +16,7 @@ module.exports = {
     env: {
       NODE_ENV: 'production',
       PORT: 3013,
-      NEXT_PUBLIC_SITE_URL: 'https://alayay.trasealla.com',
+      NEXT_PUBLIC_SITE_URL: 'https://alayay.com',
     },
 
     log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
