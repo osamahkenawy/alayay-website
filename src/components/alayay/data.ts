@@ -1,20 +1,23 @@
 export const ALAYAY_BRAND = {
   name: 'Alayay Maintenance & General Contracting',
   tagline: 'Building Quality That Lasts',
-  phone: '+971 58 881 6666',
+  phone: '+971 2 234 1084',
   whatsapp: 'https://wa.me/971588816666',
-  email: 'info@alayay.ae',
-  website: 'alayay.ae',
-  address: 'Abu Dhabi - Edge Tower - Floor 4 - Office 3',
+  email: 'support@alayay.com',
+  website: 'alayay.com',
+  address: 'Floor 4, Edge Tower, Abu Dhabi, UAE',
+  mapCoords: { lat: 24.4599219, lng: 54.3796179 },
+  mapDirectionsUrl:
+    'https://www.google.com/maps/dir//EDGE+TOWER,+F95H%2BXVW,+Al+Qubaisi+Building+-+732+Sheikh+Rashid+Bin+Saeed+St+-+Al+Manhal+-+W15+02+-+Abu+Dhabi/@24.374497,54.55468,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3e5e6900270e5a15:0xf41d3373f88a3b21!2m2!1d54.3796179!2d24.4599219?entry=ttu',
 };
 
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alayay.ae'
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://alayay.com'
 ).replace(/\/$/, '');
 
-export const DEFAULT_TITLE = 'Alayay Maintenance & General Contracting — Building Quality That Lasts';
+export const DEFAULT_TITLE = 'Alayay Maintenance & General Contracting — Villa Construction, Contracting & Maintenance in Abu Dhabi';
 export const DEFAULT_DESCRIPTION =
-  'Expert maintenance & general contracting services for villas, pools, flooring, and facilities across UAE. Based in Abu Dhabi. Annual maintenance contracts, emergency repairs, and quality workmanship.';
+  'Villa construction, general contracting, renovation, interior fit-out, MEP, waterproofing, landscaping, swimming pools, and annual maintenance contracts (AMC) across Abu Dhabi and the UAE. Licensed, trusted, and built to last.';
 export const DEFAULT_OG_IMAGE = '/og-image.png';
 
 export const NAV_LINKS = [

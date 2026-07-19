@@ -4,6 +4,12 @@ import Layout from 'components/alayay/Layout';
 import { ALAYAY_BRAND } from 'components/alayay/data';
 import { ShieldIcon, ArrowRightIcon } from 'components/alayay/Icons';
 import { useT } from '../hooks/useT';
+import { getCmsOverlay } from '../lib/cms';
+
+export async function getStaticProps({ locale }: { locale?: string }) {
+  const cms = await getCmsOverlay((locale as 'en' | 'ar') ?? 'en');
+  return { props: { cms }, revalidate: 60 };
+}
 
 const VALUE_ICONS = [
   <svg key="1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6 text-orange"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>,
@@ -23,18 +29,18 @@ export default function AboutPage() {
       type="article"
     >
       {/* Hero */}
-      <section className="relative bg-navy py-28 pt-40 overflow-hidden">
+      <section className="relative bg-cream py-28 pt-40 overflow-hidden">
         <div className="absolute inset-0">
-          <Image src="/images/alayay/bg-banner.png" alt="" fill priority sizes="100vw" className="object-cover object-center opacity-30" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/60 to-navy" />
+          <Image src="/images/alayay/bg-banner-team.png" alt="" fill priority sizes="100vw" className="object-cover object-center opacity-[0.12]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-cream/60 to-cream" />
         </div>
         <div className="al-container relative z-10 text-center">
           <p className="al-eyebrow mb-4">{t.about.eyebrow}</p>
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-4xl lg:text-6xl font-bold text-navy mb-6 leading-tight">
             {t.about.heading1}<br />
             <span className="text-orange">{t.about.heading2}</span>
           </h1>
-          <p className="text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">{t.about.subtitle}</p>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">{t.about.subtitle}</p>
         </div>
       </section>
 

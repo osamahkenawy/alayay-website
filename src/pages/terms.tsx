@@ -36,11 +36,11 @@ export default function TermsPage() {
       canonical="/terms"
       type="article"
     >
-      <section className="bg-navy py-24 pt-36">
+      <section className="bg-cream py-24 pt-36">
         <div className="al-container text-center">
           <p className="al-eyebrow mb-4">Legal</p>
-          <h1 className="text-4xl lg:text-5xl font-bold text-white">Terms & Conditions</h1>
-          <p className="text-white/50 mt-4 text-sm">Last updated: June 2026</p>
+          <h1 className="text-4xl lg:text-5xl font-bold text-navy">Terms & Conditions</h1>
+          <p className="text-gray-500 mt-4 text-sm">Last updated: June 2026</p>
         </div>
       </section>
 

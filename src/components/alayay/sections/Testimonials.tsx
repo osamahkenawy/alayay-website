@@ -3,11 +3,13 @@ import Image from 'next/image';
 import { TESTIMONIALS } from '../data';
 import { StarIcon, ArrowRightIcon } from '../Icons';
 import { useT, useLocale } from '../../../hooks/useT';
+import { useCms } from '../../../contexts/cms';
 
 const Testimonials: React.FC = () => {
   const [active, setActive] = useState(0);
   const t = useT();
   const locale = useLocale();
+  const { media } = useCms();
   const isRtl = locale === 'ar';
 
   return (
@@ -71,6 +73,8 @@ const Testimonials: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {TESTIMONIALS.map((item, i) => {
                 const translated = t.testimonials.items[i] ?? { name: item.name, role: item.role, text: item.text };
+                const avatar = media.testimonials?.[i]?.avatar ?? item.avatar;
+                const rating = media.testimonials?.[i]?.rating ?? item.rating;
                 return (
                   <div
                     key={item.name}
@@ -80,7 +84,7 @@ const Testimonials: React.FC = () => {
                     }`}
                   >
                     <div className="flex gap-0.5 mb-3">
-                      {[...Array(item.rating)].map((_, si) => (
+                      {[...Array(rating)].map((_, si) => (
                         <StarIcon key={si} className="w-4 h-4 text-orange" filled />
                       ))}
                     </div>
@@ -90,7 +94,7 @@ const Testimonials: React.FC = () => {
                     </p>
                     <div className="flex items-center gap-3">
                       <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0">
-                        <Image src={item.avatar} alt={translated.name} fill sizes="40px" className="object-cover" />
+                        <Image src={avatar} alt={translated.name} fill sizes="40px" className="object-cover" />
                       </div>
                       <div>
                         <div className={`font-semibold text-sm ${i === active ? 'text-white' : 'text-navy'}`}>{translated.name}</div>

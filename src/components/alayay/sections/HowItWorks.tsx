@@ -28,15 +28,15 @@ const HowItWorks: React.FC = () => {
         </div>
 
         <div className="relative">
-          <div className="hidden lg:block absolute top-12 left-[calc(12.5%+32px)] right-[calc(12.5%+32px)] h-0.5 bg-gradient-to-r from-orange via-orange/50 to-orange" />
+          <div className="hidden lg:block absolute top-12 left-[calc(12.5%+32px)] right-[calc(12.5%+32px)] h-0.5 bg-stone-border" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {t.howItWorks.steps.map((step, i) => (
               <div key={i} className="relative flex flex-col items-center text-center group">
                 <div className="relative mb-6">
-                  <div className="w-24 h-24 rounded-full bg-orange flex items-center justify-center text-white shadow-lg shadow-orange/30 group-hover:scale-105 transition-transform duration-200 relative z-10">
+                  <div className="w-24 h-24 rounded-full bg-white border-2 border-navy flex items-center justify-center text-navy shadow-sm group-hover:scale-105 transition-transform duration-200 relative z-10">
                     {STEP_ICONS[i]}
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-navy text-white text-sm font-bold flex items-center justify-center z-20">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-orange text-white text-sm font-bold flex items-center justify-center z-20">
                     {i + 1}
                   </div>
                 </div>

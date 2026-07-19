@@ -15,7 +15,7 @@ type Props = {
 const Layout: React.FC<Props> = ({ title, description, ogImage, canonical, type, children }) => (
   <>
     <Seo title={title} description={description} image={ogImage} canonical={canonical} type={type} />
-    <div className="min-h-screen flex flex-col bg-white text-gray-900">
+    <div className="min-h-screen flex flex-col bg-cream text-gray-900">
       <Header />
       <main className="flex-1 pt-20">{children}</main>
       <Footer />

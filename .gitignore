@@ -31,6 +31,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# CMS runtime data — the client's edited content, password hash and uploaded
+# images live on the server only. Never commit or rsync these.
+cms/content/
+cms/public/uploads/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

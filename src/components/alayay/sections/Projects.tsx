@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { PROJECTS } from '../data';
 import { ArrowRightIcon, VillaIcon, PoolIcon, FlooringIcon } from '../Icons';
 import { useT, useLocale } from '../../../hooks/useT';
+import { useCms } from '../../../contexts/cms';
 
 const ProjectIcons: Record<string, React.ReactNode> = {
   villa: <VillaIcon className="w-4 h-4" />,
@@ -85,6 +86,7 @@ const Projects: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const t = useT();
   const locale = useLocale();
+  const { media } = useCms();
   const isRtl = locale === 'ar';
   const total = PROJECTS.length;
 
@@ -93,6 +95,8 @@ const Projects: React.FC = () => {
 
   const enriched: ProjectItem[] = PROJECTS.map((p, i) => ({
     ...p,
+    before: media.projects?.[i]?.before ?? p.before,
+    after: media.projects?.[i]?.after ?? p.after,
     translatedTitle: t.projects.items[i]?.title ?? p.title,
     translatedCategory: t.projects.items[i]?.category ?? p.category,
     translatedDesc: t.projects.items[i]?.description ?? p.description,

@@ -6,7 +6,14 @@ import HowItWorks from 'components/alayay/sections/HowItWorks';
 import WhyUs from 'components/alayay/sections/WhyUs';
 import Projects from 'components/alayay/sections/Projects';
 import Testimonials from 'components/alayay/sections/Testimonials';
+import Location from 'components/alayay/sections/Location';
 import Contact from 'components/alayay/sections/Contact';
+import { getCmsOverlay } from '../lib/cms';
+
+export async function getStaticProps({ locale }: { locale?: string }) {
+  const cms = await getCmsOverlay((locale as 'en' | 'ar') ?? 'en');
+  return { props: { cms }, revalidate: 60 };
+}
 
 export default function Home() {
   return (
@@ -18,6 +25,7 @@ export default function Home() {
       <WhyUs />
       <Projects />
       <Testimonials />
+      <Location />
       <Contact />
     </Layout>
   );

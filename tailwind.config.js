@@ -16,6 +16,14 @@ module.exports = {
           hover: '#D05204',
           light: '#FF7722',
         },
+        cream: {
+          DEFAULT: '#F7F6F3',
+          dark: '#EFEDE7',
+        },
+        stone: {
+          DEFAULT: '#E8E2D8',
+          border: '#DDD5C6',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

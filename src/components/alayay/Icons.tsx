@@ -160,6 +160,103 @@ export const CloseIcon = ({ className = '' }) => (
   </svg>
 );
 
+// ---- Category icons for the full services listing ----
+export const BuildingIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="4" y="2" width="16" height="20" rx="1" /><path d="M9 22v-4h6v4M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01" />
+  </svg>
+);
+export const CraneIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M4 21V7l9-4 9 4" /><path d="M13 3v11" /><path d="M13 11l7 2" /><path d="M20 13v4" /><path d="M4 21h16" /><path d="M8 21v-6h4v6" />
+  </svg>
+);
+export const HardHatIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M4 18a8 8 0 0116 0" /><path d="M2 18h20" /><path d="M12 6v4" /><path d="M9 6h6" />
+  </svg>
+);
+export const ExtensionIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="3" y="10" width="9" height="11" /><path d="M12 21V6l9 4v11h-9" />
+  </svg>
+);
+export const RenovationIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" /><path d="M3 3l3 3" />
+  </svg>
+);
+export const CivilIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M3 21h18" /><path d="M5 21V10l7-7 7 7v11" /><path d="M9 21v-6h6v6" />
+  </svg>
+);
+export const FitOutIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="3" y="4" width="18" height="16" rx="1" /><path d="M3 9h18" /><path d="M9 4v16" />
+  </svg>
+);
+export const FacadeIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="3" y="3" width="18" height="18" rx="1" /><path d="M3 9h18M3 15h18M9 3v18M15 3v18" />
+  </svg>
+);
+export const MepIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+  </svg>
+);
+export const PaintIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M18 3l3 3-9 9-4 1 1-4z" /><path d="M3 21c1-4 3-6 6-6" />
+  </svg>
+);
+export const WaterproofIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M12 2s7 8 7 13a7 7 0 01-14 0c0-5 7-13 7-13z" />
+  </svg>
+);
+export const LandscapeIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M2 20h20" /><path d="M4 20l5-9 4 6 3-5 4 8" /><circle cx="18" cy="5" r="2" />
+  </svg>
+);
+export const AluminiumIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <rect x="3" y="3" width="18" height="18" rx="1" /><path d="M12 3v18" /><path d="M3 12h18" />
+  </svg>
+);
+export const MetalIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M4 21V10l8-7 8 7v11" /><path d="M4 21h16" /><path d="M9 21v-8h6v8" />
+  </svg>
+);
+export const SmartHomeIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M3 11l9-8 9 8" /><path d="M5 10v10h14V10" /><circle cx="12" cy="15" r="2" />
+  </svg>
+);
+export const ConsultancyIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /><path d="M9 11l1.5 1.5L14 9" />
+  </svg>
+);
+export const StarBadgeIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.5L12 16l-5.9 3.5L7.6 13l-5-4.4 6.6-.6z" />
+  </svg>
+);
+export const ClockIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <circle cx="12" cy="12" r="9" /><polyline points="12 7 12 12 16 14" />
+  </svg>
+);
+export const DirectionsIcon = ({ className = '' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M21 3l-9 18-2-7-7-2 18-9z" />
+  </svg>
+);
+
 export const getServiceIcon = (icon: string, className = '') => {
   switch (icon) {
     case 'villa': return <VillaIcon className={className} />;
@@ -168,6 +265,23 @@ export const getServiceIcon = (icon: string, className = '') => {
     case 'general': return <GeneralIcon className={className} />;
     case 'emergency': return <EmergencyIcon className={className} />;
     case 'amc': return <AMCIcon className={className} />;
+    case 'building': return <BuildingIcon className={className} />;
+    case 'crane': return <CraneIcon className={className} />;
+    case 'hardhat': return <HardHatIcon className={className} />;
+    case 'extension': return <ExtensionIcon className={className} />;
+    case 'renovation': return <RenovationIcon className={className} />;
+    case 'civil': return <CivilIcon className={className} />;
+    case 'fitout': return <FitOutIcon className={className} />;
+    case 'facade': return <FacadeIcon className={className} />;
+    case 'mep': return <MepIcon className={className} />;
+    case 'paint': return <PaintIcon className={className} />;
+    case 'waterproof': return <WaterproofIcon className={className} />;
+    case 'landscape': return <LandscapeIcon className={className} />;
+    case 'aluminium': return <AluminiumIcon className={className} />;
+    case 'metal': return <MetalIcon className={className} />;
+    case 'smarthome': return <SmartHomeIcon className={className} />;
+    case 'consultancy': return <ConsultancyIcon className={className} />;
+    case 'star': return <StarBadgeIcon className={className} />;
     default: return <GeneralIcon className={className} />;
   }
 };

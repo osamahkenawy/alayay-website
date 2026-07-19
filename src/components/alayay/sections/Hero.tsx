@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ALAYAY_BRAND } from '../data';
 import { ArrowRightIcon, CalendarIcon } from '../Icons';
 import { useT } from '../../../hooks/useT';
+import { useCms } from '../../../contexts/cms';
 
 const BADGE_ICONS = [
   <svg key="1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>,
@@ -13,64 +14,68 @@ const BADGE_ICONS = [
 
 const Hero: React.FC = () => {
   const t = useT();
+  const { brand } = useCms();
+  const whatsapp = brand.whatsapp ?? ALAYAY_BRAND.whatsapp;
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-navy">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/alayay/bg-banner.png"
-          alt="Professional villa maintenance services"
-          fill priority sizes="100vw"
-          className="object-cover object-center opacity-50"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy-dark/80 to-navy/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/80 via-transparent to-transparent" />
-      </div>
+    <section className="relative bg-cream overflow-hidden">
+      <div className="relative grid lg:grid-cols-2 min-h-[640px] lg:h-[calc(100vh-5rem)]">
+        {/* Text panel */}
+        <div className="relative z-10 flex flex-col justify-center al-container lg:!px-0 lg:ps-8 xl:ps-16 lg:pe-10 py-14 lg:py-0 order-2 lg:order-1">
+          <div className="inline-flex items-center gap-2 bg-navy/5 border border-navy/15 rounded-full px-4 py-1.5 mb-8 w-fit animate-fade-in">
+            <span className="w-2 h-2 rounded-full bg-orange animate-pulse" />
+            <span className="text-navy text-xs font-semibold tracking-widest uppercase">{t.hero.badge}</span>
+          </div>
 
-      <div className="relative z-10 al-container w-full pt-8 pb-16">
-        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8 animate-fade-in">
-          <span className="w-2 h-2 rounded-full bg-orange animate-pulse" />
-          <span className="text-white text-xs font-semibold tracking-widest uppercase">{t.hero.badge}</span>
-        </div>
+          <h1 className="text-navy font-bold leading-[1.05] mb-6 animate-fade-up" style={{ fontSize: 'clamp(2.2rem, 4.2vw, 3.75rem)' }}>
+            {t.hero.line1}<br />
+            <span className="text-orange">{t.hero.line2}</span><br />
+            {t.hero.line3}
+          </h1>
 
-        <h1 className="text-white font-bold leading-[1.05] mb-6 animate-fade-up" style={{ fontSize: 'clamp(2.4rem, 5.5vw, 4.5rem)' }}>
-          {t.hero.line1}<br />
-          <span className="text-orange">{t.hero.line2}</span><br />
-          {t.hero.line3}
-        </h1>
+          <p className="text-gray-600 text-base lg:text-lg max-w-lg mb-10 animate-fade-up leading-relaxed">
+            {t.hero.subtitle}
+          </p>
 
-        <p className="text-white/75 text-base lg:text-lg max-w-lg mb-10 animate-fade-up leading-relaxed">
-          {t.hero.subtitle}
-        </p>
+          <div className="flex flex-wrap gap-4 animate-fade-up mb-14">
+            <a
+              href={whatsapp}
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-orange text-white font-semibold px-7 py-4 rounded-full hover:bg-orange-hover transition-all duration-200 text-sm shadow-lg shadow-orange/25"
+            >
+              {t.hero.bookBtn}
+              <ArrowRightIcon className="w-4 h-4 rtl:rotate-180" />
+            </a>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center gap-2.5 border-2 border-navy/30 text-navy font-semibold px-7 py-4 rounded-full hover:bg-navy hover:text-white hover:border-navy transition-all duration-200 text-sm"
+            >
+              <CalendarIcon className="w-4 h-4" />
+              {t.hero.inspectBtn}
+            </Link>
+          </div>
 
-        <div className="flex flex-wrap gap-4 animate-fade-up mb-16">
-          <a
-            href={ALAYAY_BRAND.whatsapp}
-            target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 bg-orange text-white font-semibold px-7 py-4 rounded-full hover:bg-orange-hover transition-all duration-200 text-sm shadow-lg shadow-orange/30"
-          >
-            {t.hero.bookBtn}
-            <ArrowRightIcon className="w-4 h-4" />
-          </a>
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2.5 border-2 border-white/50 text-white font-semibold px-7 py-4 rounded-full hover:bg-white/10 hover:border-white transition-all duration-200 text-sm"
-          >
-            <CalendarIcon className="w-4 h-4" />
-            {t.hero.inspectBtn}
-          </Link>
-        </div>
-
-        <div className="inline-flex flex-wrap gap-px bg-white/10 rounded-2xl p-1 backdrop-blur-sm border border-white/10">
-          {t.hero.badges.map((b, i) => (
-            <div key={i} className="flex items-center gap-3 px-5 py-3.5 text-white">
-              <div className="text-white/70">{BADGE_ICONS[i]}</div>
-              <div className="leading-tight">
-                <div className="font-bold text-sm">{b.label}</div>
-                <div className="text-white/60 text-xs">{b.sub}</div>
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 w-fit">
+            {t.hero.badges.map((b, i) => (
+              <div key={i} className="flex items-center gap-3 px-5 py-3.5 bg-white rounded-xl shadow-sm">
+                <div className="text-navy/60">{BADGE_ICONS[i]}</div>
+                <div className="leading-tight">
+                  <div className="font-bold text-sm text-navy">{b.label}</div>
+                  <div className="text-gray-500 text-xs">{b.sub}</div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        {/* Photo panel */}
+        <div className="relative min-h-[280px] lg:min-h-0 order-1 lg:order-2 lg:[clip-path:polygon(8%_0,100%_0,100%_100%,0_100%)]">
+          <Image
+            src="/images/alayay/bg-banner.png"
+            alt="Professional villa maintenance services"
+            fill priority sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover object-center"
+          />
         </div>
       </div>
     </section>

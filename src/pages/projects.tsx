@@ -4,6 +4,12 @@ import Link from 'next/link';
 import { ALAYAY_BRAND } from 'components/alayay/data';
 import { ArrowRightIcon } from 'components/alayay/Icons';
 import { useT } from '../hooks/useT';
+import { getCmsOverlay } from '../lib/cms';
+
+export async function getStaticProps({ locale }: { locale?: string }) {
+  const cms = await getCmsOverlay((locale as 'en' | 'ar') ?? 'en');
+  return { props: { cms }, revalidate: 60 };
+}
 
 export default function ProjectsPage() {
   const t = useT();
@@ -14,14 +20,14 @@ export default function ProjectsPage() {
       description="Real maintenance transformations across villas, pools, and flooring in Dubai and UAE. See our before and after results."
       canonical="/projects"
     >
-      <section className="bg-navy py-20 pt-32">
+      <section className="bg-cream py-20 pt-32">
         <div className="al-container text-center">
           <p className="al-eyebrow mb-4">{t.projectsPage.eyebrow}</p>
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-5">
+          <h1 className="text-4xl lg:text-6xl font-bold text-navy mb-5">
             {t.projectsPage.heading1}<br />
             <span className="text-orange">{t.projectsPage.heading2}</span>
           </h1>
-          <p className="text-white/60 max-w-xl mx-auto text-lg">{t.projectsPage.subtitle}</p>
+          <p className="text-gray-600 max-w-xl mx-auto text-lg">{t.projectsPage.subtitle}</p>
         </div>
       </section>
 

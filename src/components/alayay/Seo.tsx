@@ -40,8 +40,14 @@ const Seo: React.FC<SeoProps> = ({
     email: ALAYAY_BRAND.email,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Dubai',
+      streetAddress: ALAYAY_BRAND.address,
+      addressLocality: 'Abu Dhabi',
       addressCountry: 'AE',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: ALAYAY_BRAND.mapCoords.lat,
+      longitude: ALAYAY_BRAND.mapCoords.lng,
     },
     sameAs: [ALAYAY_BRAND.whatsapp],
   };

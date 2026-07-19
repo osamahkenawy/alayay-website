@@ -1,20 +1,21 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ALAYAY_BRAND } from './data';
-import { PhoneIcon, EmailIcon, GlobeIcon, LocationIcon, FacebookIcon, InstagramIcon, LinkedInIcon, YoutubeIcon } from './Icons';
-import { useT } from '../../hooks/useT';
+import { SERVICE_CATEGORIES } from './services-data';
+import { PhoneIcon, EmailIcon, GlobeIcon, LocationIcon, FacebookIcon, InstagramIcon, LinkedInIcon, YoutubeIcon, ArrowRightIcon } from './Icons';
+import { useT, useLocale } from '../../hooks/useT';
+import { useCms } from '../../contexts/cms';
 
-const SERVICE_LINK_HREFS = [
-  '/services/villa',
-  '/services/pool',
-  '/services/flooring',
-  '/services/general',
-  '/services/emergency',
-  '/services/amc',
-];
+const FOOTER_CATEGORY_IDS = ['construction', 'general-contracting', 'renovation', 'fit-out', 'mep', 'maintenance'];
 
 const Footer: React.FC = () => {
   const t = useT();
+  const isAr = useLocale() === 'ar';
+  const { brand } = useCms();
+  const phone = brand.phone ?? ALAYAY_BRAND.phone;
+  const email = brand.email ?? ALAYAY_BRAND.email;
+  const address = brand.address ?? ALAYAY_BRAND.address;
+  const footerServiceCategories = SERVICE_CATEGORIES.filter((c) => FOOTER_CATEGORY_IDS.includes(c.id));
 
   const quickLinks = [
     { label: t.footer.links.home, href: '/' },
@@ -30,13 +31,13 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-5">
+            <Link href="/" className="inline-block mb-5 bg-white rounded-xl px-3.5 py-2.5">
               <Image
-                src="/images/alayay/alayay-main-logo-white.png"
+                src="/images/alayay/logo-alayay-dark-blue-navy.png"
                 alt="Alayay Maintenance"
                 width={160}
-                height={50}
-                className="h-12 w-auto object-contain"
+                height={42}
+                className="h-8 w-auto object-contain"
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">{t.footer.tagline}</p>
@@ -76,13 +77,18 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">{t.footer.ourServices}</h4>
             <ul className="space-y-3">
-              {t.footer.serviceLinks.map((label, i) => (
-                <li key={label}>
-                  <Link href={SERVICE_LINK_HREFS[i] ?? '#'} className="text-white/60 hover:text-orange text-sm transition-colors">
-                    {label}
+              {footerServiceCategories.map((cat) => (
+                <li key={cat.id}>
+                  <Link href={`/services#${cat.id}`} className="text-white/60 hover:text-orange text-sm transition-colors">
+                    {isAr ? cat.titleAr : cat.title}
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/services" className="inline-flex items-center gap-1.5 text-orange hover:text-orange-hover text-sm font-semibold transition-colors">
+                  {t.services.viewAll} <ArrowRightIcon className="w-3.5 h-3.5 rtl:rotate-180" />
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -91,15 +97,15 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-semibold mb-5 uppercase tracking-wider text-xs">{t.footer.contactUs}</h4>
             <ul className="space-y-4">
               <li>
-                <a href={`tel:${ALAYAY_BRAND.phone}`} className="flex items-start gap-3 text-white/60 hover:text-orange text-sm transition-colors">
+                <a href={`tel:${phone}`} className="flex items-start gap-3 text-white/60 hover:text-orange text-sm transition-colors">
                   <PhoneIcon className="w-4 h-4 mt-0.5 shrink-0 text-orange" />
-                  <span dir="ltr">{ALAYAY_BRAND.phone}</span>
+                  <span dir="ltr">{phone}</span>
                 </a>
               </li>
               <li>
-                <a href={`mailto:${ALAYAY_BRAND.email}`} className="flex items-start gap-3 text-white/60 hover:text-orange text-sm transition-colors">
+                <a href={`mailto:${email}`} className="flex items-start gap-3 text-white/60 hover:text-orange text-sm transition-colors">
                   <EmailIcon className="w-4 h-4 mt-0.5 shrink-0 text-orange" />
-                  <span dir="ltr">{ALAYAY_BRAND.email}</span>
+                  <span dir="ltr">{email}</span>
                 </a>
               </li>
               <li>
@@ -111,7 +117,7 @@ const Footer: React.FC = () => {
               <li>
                 <span className="flex items-start gap-3 text-white/60 text-sm">
                   <LocationIcon className="w-4 h-4 mt-0.5 shrink-0 text-orange" />
-                  {ALAYAY_BRAND.address}
+                  {address}
                 </span>
               </li>
             </ul>

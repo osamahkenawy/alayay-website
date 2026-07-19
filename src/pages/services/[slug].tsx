@@ -7,6 +7,7 @@ import { getServiceIcon, ArrowRightIcon, CheckIcon } from 'components/alayay/Ico
 import Testimonials from 'components/alayay/sections/Testimonials';
 import { translations } from '../../locales/translations';
 import { useT } from '../../hooks/useT';
+import { getCmsOverlay } from '../../lib/cms';
 
 type ServiceDetail = {
   id: string;
@@ -32,32 +33,32 @@ export default function ServicePage({ service }: Props) {
   return (
     <Layout title={service.title} description={service.longDesc} canonical={service.href}>
       {/* Hero */}
-      <section className="relative bg-navy py-24 pt-36 overflow-hidden">
+      <section className="relative bg-cream py-24 pt-36 overflow-hidden">
         <div className="absolute inset-0">
-          <Image src={service.image} alt={service.title} fill priority sizes="100vw" className="object-cover opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-navy/70 to-navy" />
+          <Image src={service.image} alt={service.title} fill priority sizes="100vw" className="object-cover opacity-[0.14]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-cream/70 to-cream" />
         </div>
         <div className="al-container relative z-10">
-          <div className="flex items-center gap-2 text-white/50 text-sm mb-6">
+          <div className="flex items-center gap-2 text-gray-500 text-sm mb-6">
             <Link href="/" className="hover:text-orange transition-colors">Home</Link>
             <span>/</span>
             <Link href="/#services" className="hover:text-orange transition-colors">{t.servicePage.breadcrumbServices}</Link>
             <span>/</span>
-            <span className="text-white">{service.title}</span>
+            <span className="text-navy">{service.title}</span>
           </div>
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-full bg-orange/20 flex items-center justify-center text-orange">
+            <div className="al-icon-badge">
               {getServiceIcon(service.icon, 'w-7 h-7')}
             </div>
             <p className="al-eyebrow">{t.servicePage.eyebrow}</p>
           </div>
-          <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 max-w-2xl leading-tight">{service.title}</h1>
-          <p className="text-white/65 text-lg max-w-xl leading-relaxed">{service.description}</p>
+          <h1 className="text-4xl lg:text-6xl font-bold text-navy mb-6 max-w-2xl leading-tight">{service.title}</h1>
+          <p className="text-gray-600 text-lg max-w-xl leading-relaxed">{service.description}</p>
           <div className="flex flex-wrap gap-4 mt-8">
             <a href={ALAYAY_BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="al-btn-primary">
               {t.servicePage.bookBtn} <ArrowRightIcon className="w-4 h-4 rtl:rotate-180" />
             </a>
-            <Link href="/#contact" className="al-btn-outline">
+            <Link href="/#contact" className="al-btn-outline-navy">
               {t.servicePage.quoteBtn}
             </Link>
           </div>
@@ -133,9 +134,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const lang = translations[locale === 'ar' ? 'ar' : 'en'];
   const serviceIndex = SERVICES.findIndex((s) => s.id === slug);
   const details = lang.serviceDetails[slug as keyof typeof lang.serviceDetails];
+  const cms = await getCmsOverlay(locale === 'ar' ? 'ar' : 'en');
 
   return {
     props: {
+      cms,
       service: {
         ...base,
         title: lang.services.items[serviceIndex]?.title ?? base.title,
@@ -144,5 +147,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         includes: details?.includes ?? [],
       },
     },
+    revalidate: 60,
   };
 };

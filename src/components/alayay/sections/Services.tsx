@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { SERVICES } from '../data';
+import { SERVICE_CATEGORIES } from '../services-data';
 import { ArrowRightIcon, getServiceIcon } from '../Icons';
-import { useT } from '../../../hooks/useT';
+import { useT, useLocale } from '../../../hooks/useT';
+import { useCms } from '../../../contexts/cms';
 
 const TrustBadgeIcons: Record<string, React.ReactNode> = {
   certified: (
@@ -29,6 +31,8 @@ const TrustBadgeIcons: Record<string, React.ReactNode> = {
 
 const Services: React.FC = () => {
   const t = useT();
+  const { media } = useCms();
+  const isAr = useLocale() === 'ar';
 
   return (
     <section id="services" className="al-section bg-gray-50">
@@ -44,7 +48,7 @@ const Services: React.FC = () => {
             <div key={service.id} className="al-card group">
               <div className="relative h-48 overflow-hidden">
                 <Image
-                  src={service.image} alt={t.services.items[i]?.title ?? service.title}
+                  src={media.services?.[i]?.image ?? service.image} alt={t.services.items[i]?.title ?? service.title}
                   fill sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -61,6 +65,27 @@ const Services: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Full category range + link to complete listing */}
+        <div className="bg-white border border-gray-100 rounded-2xl p-6 lg:p-8 mb-16">
+          <div className="flex flex-wrap gap-2.5 justify-center mb-6">
+            {SERVICE_CATEGORIES.map((cat) => (
+              <Link
+                key={cat.id}
+                href={`/services#${cat.id}`}
+                className="inline-flex items-center gap-2 bg-cream border border-stone-border rounded-full px-4 py-2 text-xs font-semibold text-navy hover:border-navy hover:bg-navy hover:text-white transition-colors"
+              >
+                {getServiceIcon(cat.icon, 'w-3.5 h-3.5')}
+                {isAr ? cat.titleAr : cat.title}
+              </Link>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link href="/services" className="al-btn-outline-navy">
+              {t.services.viewAll} <ArrowRightIcon className="w-4 h-4 rtl:rotate-180" />
+            </Link>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 rounded-2xl overflow-hidden shadow-sm">
